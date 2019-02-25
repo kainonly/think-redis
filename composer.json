@@ -1,0 +1,17 @@
+{
+  "name": "kain/laravel-bit",
+  "description": "Laravel Request CURD Library",
+  "license": "Apache2.0",
+  "autoload": {
+    "psr-4": {
+      "laravel\\bit\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "kain",
+      "email": "zhangtqx@vip.qq.com"
+    }
+  ],
+  "require": {}
+}
