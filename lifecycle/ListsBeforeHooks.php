@@ -1,6 +1,6 @@
 <?php
 
-namespace think\bit\lifecycle;
+namespace lumen\bit\lifecycle;
 
 interface ListsBeforeHooks
 {
