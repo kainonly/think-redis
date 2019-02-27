@@ -13,5 +13,7 @@
       "email": "zhangtqx@vip.qq.com"
     }
   ],
-  "require": {}
+  "require": {
+    "laravel/lumen-framework": "^5.7"
+  }
 }
