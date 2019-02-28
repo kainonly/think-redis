@@ -10,6 +10,7 @@ abstract class BitController extends BaseController
     protected $model;
     protected $post = [];
 
+    protected $origin_lists_validate = [];
     protected $origin_lists_before_result = [
         'error' => 1,
         'msg' => 'error:before_fail'

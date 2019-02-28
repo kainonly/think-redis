@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Validator;
  */
 trait ListsModel
 {
-    function lists()
+    public function lists()
     {
         $validator = Validator::make($this->post, array_merge($this->lists_validate, [
             'page' => 'required',
