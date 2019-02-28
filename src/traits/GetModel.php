@@ -12,18 +12,19 @@ use Illuminate\Support\Facades\Validator;
  * @property string model
  * @property array post
  * @property array get_validate
+ * @property array get_default_validate
  * @property array get_before_result
  * @property array get_condition
- * @property array get_select
+ * @property array get_columns
  */
 trait GetModel
 {
     public function get()
     {
-        $validator = Validator::make($this->post, array_merge($this->get_validate, [
-            'where' => 'required_without:id|array',
-            'where.*' => 'array|size:3'
-        ]));
+        $validator = Validator::make($this->post, array_merge(
+            $this->get_validate,
+            $this->get_default_validate
+        ));
 
         if ($validator->fails()) return [
             'error' => 1,
@@ -47,7 +48,7 @@ trait GetModel
 
             $data = Db::table($this->model)
                 ->where($condition)
-                ->first($this->get_select);
+                ->first($this->get_columns);
 
             return method_exists($this, '__getCustomReturn') ? $this->__getCustomReturn($data) : [
                 'error' => 0,

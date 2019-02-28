@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
  * @property string model
  * @property array post
  * @property array lists_validate
+ * @property array lists_default_validate
  * @property array lists_before_result
  * @property array lists_condition
  * @property string lists_order_columns
@@ -22,13 +23,10 @@ trait ListsModel
 {
     public function lists()
     {
-        $validator = Validator::make($this->post, array_merge($this->lists_validate, [
-            'page' => 'required',
-            'page.limit' => 'required|integer|between:1,50',
-            'page.index' => 'required|integer|min:1',
-            'where' => 'sometimes|array',
-            'where.*' => 'array|size:3'
-        ]));
+        $validator = Validator::make($this->post, array_merge(
+            $this->lists_validate,
+            $this->lists_default_validate
+        ));
 
         if ($validator->fails()) return [
             'error' => 1,

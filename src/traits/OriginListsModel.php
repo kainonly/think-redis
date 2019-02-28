@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
  * @property string model
  * @property array post
  * @property array origin_lists_validate
+ * @property array origin_lists_default_validate
  * @property array origin_lists_before_result
  * @property array origin_lists_condition
  * @property string origin_lists_order_columns
@@ -22,10 +23,10 @@ trait OriginListsModel
 {
     public function originLists()
     {
-        $validator = Validator::make($this->post, array_merge($this->origin_lists_validate, [
-            'where' => 'sometimes|array',
-            'where.*' => 'array|size:3'
-        ]));
+        $validator = Validator::make($this->post, array_merge(
+            $this->origin_lists_validate,
+            $this->origin_lists_default_validate
+        ));
 
         if ($validator->fails()) return [
             'error' => 1,
