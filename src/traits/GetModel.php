@@ -3,7 +3,6 @@
 namespace lumen\bit\traits;
 
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +15,6 @@ use Illuminate\Support\Facades\Validator;
  * @property array get_before_result
  * @property array get_condition
  * @property array get_select
- * @method validate(Request $request, array $rules, array $messages = [], array $customAttributes = [])
  */
 trait GetModel
 {

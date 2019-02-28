@@ -38,6 +38,7 @@ abstract class BitController extends BaseController
     protected $get_condition = [];
     protected $get_select = ['*'];
 
+    protected $add_validate = [];
     protected $add_before_result = [
         'error' => 1,
         'msg' => 'error:before_fail'
