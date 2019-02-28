@@ -95,7 +95,8 @@ abstract class BitController extends BaseController
 
     protected $delete_validate = [];
     protected $delete_default_validate = [
-        'id' => 'required_without:where|string|size:36',
+        'id' => 'required_without:where|array',
+        'id.*' => 'string|size:36',
         'where' => 'required_without:id|array',
         'where.*' => 'array|size:3'
     ];
