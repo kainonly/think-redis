@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
  * @property string model
  * @property array post
  * @property array add_validate
+ * @property array add_default_validate
  * @property array add_before_result
  * @property array add_after_result
  * @property array add_fail_result
@@ -20,7 +21,11 @@ trait AddModel
 {
     public function add()
     {
-        $validator = Validator::make($this->post, $this->add_validate);
+        $validator = Validator::make($this->post, array_merge(
+            $this->add_validate,
+            $this->add_default_validate
+        ));
+
         if ($validator->fails()) return [
             'error' => 1,
             'msg' => $validator->errors()

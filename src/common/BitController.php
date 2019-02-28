@@ -19,6 +19,7 @@ abstract class BitController extends BaseController
     protected $origin_lists_order_direct = 'desc';
     protected $origin_lists_columns = ['*'];
 
+    protected $lists_validate = [];
     protected $lists_before_result = [
         'error' => 1,
         'msg' => 'error:before_fail'
@@ -39,6 +40,9 @@ abstract class BitController extends BaseController
     protected $get_select = ['*'];
 
     protected $add_validate = [];
+    protected $add_default_validate = [
+        'id' => 'sometimes|required|string|size:36'
+    ];
     protected $add_before_result = [
         'error' => 1,
         'msg' => 'error:before_fail'

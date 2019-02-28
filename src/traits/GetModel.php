@@ -20,7 +20,11 @@ trait GetModel
 {
     public function get()
     {
-        $validator = Validator::make($this->post, $this->get_validate);
+        $validator = Validator::make($this->post, array_merge($this->get_validate, [
+            'where' => 'required_without:id|array',
+            'where.*' => 'array|size:3'
+        ]));
+
         if ($validator->fails()) return [
             'error' => 1,
             'msg' => $validator->errors()
@@ -33,14 +37,10 @@ trait GetModel
 
         try {
             $condition = $this->get_condition;
-            if (isset($this->post['id']) &&
-                !empty($this->post['id'])) array_push(
+            if (isset($this->post['id'])) array_push(
                 $condition,
                 ['id', '=', $this->post['id']]
-            );
-
-            if (isset($this->post['where']) &&
-                !empty($this->post['where'])) $condition = array_merge(
+            ); else $condition = array_merge(
                 $condition,
                 $this->post['where']
             );
