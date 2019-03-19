@@ -3,7 +3,7 @@
 namespace lumen\bit\common;
 
 use Illuminate\Http\Request;
-use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller as BaseController;
 
 abstract class BitController extends BaseController
 {
