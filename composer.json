@@ -1,7 +1,7 @@
 {
   "name": "kain/laravel-bit",
   "description": "Laravel Request CURD Library",
-  "license": "Apache2.0",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "laravel\\bit\\": "src/"
