@@ -1,6 +1,6 @@
 <?php
 
-namespace lumen\bit\common;
+namespace laravel\bit\common;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;

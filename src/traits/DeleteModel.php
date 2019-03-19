@@ -1,6 +1,6 @@
 <?php
 
-namespace lumen\bit\traits;
+namespace laravel\bit\traits;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;

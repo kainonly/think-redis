@@ -1,6 +1,6 @@
 <?php
 
-namespace lumen\bit\traits;
+namespace laravel\bit\traits;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;

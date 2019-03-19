@@ -1,6 +1,6 @@
 <?php
 
-namespace lumen\bit\lifecycle;
+namespace laravel\bit\lifecycle;
 
 interface EditAfterHooks
 {
