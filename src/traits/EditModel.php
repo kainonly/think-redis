@@ -39,7 +39,7 @@ trait EditModel
         }
 
         unset($this->post['switch']);
-        $this->post['update_time'] = Carbon::now()->toDateTimeString();
+        $this->post['update_time'] = Carbon::now()->toDate();
 
         if (method_exists($this, '__editBeforeHooks') &&
             !$this->__editBeforeHooks()) {

@@ -31,7 +31,7 @@ trait AddModel
             'msg' => $validator->errors()
         ];
 
-        $this->post['create_time'] = $this->post['update_time'] = Carbon::now()->toDateTimeString();
+        $this->post['create_time'] = $this->post['update_time'] = Carbon::now()->toDate();
 
         if (method_exists($this, '__addBeforeHooks') &&
             !$this->__addBeforeHooks()) {
