@@ -43,7 +43,7 @@ abstract class BitController extends BaseController
 
     protected $get_validate = [];
     protected $get_default_validate = [
-        'id' => 'required_without:where|string|size:36',
+        'id' => 'required_without:where|uuid',
         'where' => 'required_without:id|array',
         'where.*' => 'array|size:3'
     ];
@@ -56,7 +56,7 @@ abstract class BitController extends BaseController
 
     protected $add_validate = [];
     protected $add_default_validate = [
-        'id' => 'sometimes|required|string|size:36'
+        'id' => 'sometimes|required|uuid'
     ];
     protected $add_before_result = [
         'error' => 1,
@@ -73,7 +73,7 @@ abstract class BitController extends BaseController
 
     protected $edit_validate = [];
     protected $edit_default_validate = [
-        'id' => 'required_without:where|string|size:36',
+        'id' => 'required_without:where|uuid',
         'switch' => 'required|bool',
         'where' => 'required_without:id|array',
         'where.*' => 'array|size:3'
@@ -96,7 +96,7 @@ abstract class BitController extends BaseController
     protected $delete_validate = [];
     protected $delete_default_validate = [
         'id' => 'required_without:where|array',
-        'id.*' => 'string|size:36',
+        'id.*' => 'uuid',
         'where' => 'required_without:id|array',
         'where.*' => 'array|size:3'
     ];
