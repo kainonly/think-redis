@@ -45,10 +45,12 @@ trait OriginListsModel
                 $this->post['where']
             );
 
-            $lists = DB::table($this->model)
-                ->where($condition)
-                ->orderBy($this->origin_lists_order_columns, $this->origin_lists_order_direct)
-                ->get($this->origin_lists_columns);
+            $listsQuery = DB::table($this->model)->where($condition)
+                ->orderBy($this->origin_lists_order_columns, $this->origin_lists_order_direct);
+
+            $lists = empty($this->origin_lists_condition_group) ?
+                $listsQuery->get($this->origin_lists_columns) :
+                $listsQuery->where($this->origin_lists_condition_group)->get($this->origin_lists_columns);
 
             return method_exists($this, '__originListsCustomReturn') ? $this->__originListsCustomReturn($lists) : [
                 'error' => 0,

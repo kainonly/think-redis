@@ -20,6 +20,7 @@ abstract class BitController extends BaseController
         'msg' => 'error:before_fail'
     ];
     protected $origin_lists_condition = [];
+    protected $origin_lists_condition_group = null;
     protected $origin_lists_order_columns = 'create_time';
     protected $origin_lists_order_direct = 'desc';
     protected $origin_lists_columns = ['*'];
@@ -37,6 +38,7 @@ abstract class BitController extends BaseController
         'msg' => 'error:before_fail'
     ];
     protected $lists_condition = [];
+    protected $lists_condition_group = null;
     protected $lists_order_columns = 'create_time';
     protected $lists_order_direct = 'desc';
     protected $lists_columns = ['*'];
