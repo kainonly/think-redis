@@ -1,19 +1,11 @@
 {
-  "name": "kain/laravel-bit",
-  "description": "Laravel Request CURD Library",
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "laravel\\bit\\": "src/"
-    }
-  },
-  "authors": [
-    {
-      "name": "kain",
-      "email": "zhangtqx@vip.qq.com"
-    }
-  ],
-  "require": {
-    "laravel/framework": "5.8.*"
-  }
+    "name": "kain/cmq-daq-sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kain",
+            "email": "zhangtqx@vip.qq.com"
+        }
+    ],
+    "require": {}
 }
