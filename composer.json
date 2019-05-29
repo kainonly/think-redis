@@ -1,11 +1,18 @@
 {
-    "name": "kain/cmq-daq-sdk",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "kain",
-            "email": "zhangtqx@vip.qq.com"
-        }
-    ],
-    "require": {}
+  "name": "kain/cmq-daq-sdk",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "kain",
+      "email": "zhangtqx@vip.qq.com"
+    }
+  ],
+  "require": {
+    "kain/cmq-sdk": "^1.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "cmq\\daq\\": "src/"
+    }
+  }
 }
