@@ -1,6 +1,7 @@
 {
   "name": "kain/cmq-daq-sdk",
   "license": "MIT",
+  "description": "CMQ 队列采集数据",
   "authors": [
     {
       "name": "kain",
