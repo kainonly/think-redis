@@ -16,8 +16,5 @@
     "psr-4": {
       "think\\lists\\": "src/"
     }
-  },
-  "require": {
-    "kain/think-bit": "5.1.*"
   }
 }
