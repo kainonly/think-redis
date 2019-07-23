@@ -1,19 +1,23 @@
 {
-  "name": "kain/cmq-daq-sdk",
+  "name": "kain/think-lists",
+  "description": "Think Bit 数组集合扩展",
   "license": "MIT",
-  "description": "CMQ 队列采集数据",
   "authors": [
     {
       "name": "kain",
       "email": "zhangtqx@vip.qq.com"
     }
   ],
-  "require": {
-    "kain/cmq-sdk": "^1.0.0"
+  "support": {
+    "docs": "https://think-bit.kain.net.cn",
+    "email": "zhangtqx@vip.qq.com"
   },
   "autoload": {
     "psr-4": {
-      "cmq\\daq\\": "src/"
+      "think\\lists\\": "src/"
     }
+  },
+  "require": {
+    "kain/think-bit": "5.1.*"
   }
 }
