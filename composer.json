@@ -16,5 +16,8 @@
     "psr-4": {
       "think\\lists\\": "src/"
     }
+  },
+  "require": {
+    "ext-json": "*"
   }
 }

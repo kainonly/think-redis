@@ -1,10 +1,14 @@
 <?php
 
-namespace think\lists\facade;
+namespace think\lists;
 
-use think\lists\BitLists;
 use think\Facade;
 
+/**
+ * Class Lists
+ * @package think\lists\facade
+ * @method static BitLists data(array $lists)
+ */
 final class Lists extends Facade
 {
     protected static function getFacadeClass()
