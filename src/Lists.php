@@ -6,7 +6,7 @@ use think\Facade;
 
 /**
  * Class Lists
- * @package think\lists\facade
+ * @package think\lists
  * @method static BitLists data(array $lists)
  */
 final class Lists extends Facade

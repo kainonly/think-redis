@@ -4,6 +4,10 @@ namespace think\lists;
 
 use Closure;
 
+/**
+ * Class BitLists
+ * @package think\lists
+ */
 final class BitLists
 {
     private $source = [];
