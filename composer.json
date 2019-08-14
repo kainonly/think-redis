@@ -1,6 +1,6 @@
 {
-  "name": "kain/think-lists",
-  "description": "Think Bit 数组集合扩展",
+  "name": "kain/think-redis",
+  "description": "Think Redis 扩展",
   "license": "MIT",
   "authors": [
     {
@@ -14,10 +14,11 @@
   },
   "autoload": {
     "psr-4": {
-      "think\\lists\\": "src/"
+      "think\\redis\\": "src/"
     }
   },
   "require": {
-    "ext-json": "*"
+    "ext-json": "*",
+    "predis/predis": "^1.1"
   }
 }
