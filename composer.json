@@ -19,6 +19,7 @@
   },
   "require": {
     "ext-json": "*",
+    "topthink/framework": "^6.0.0",
     "predis/predis": "^1.1"
   }
 }
