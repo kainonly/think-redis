@@ -17,6 +17,13 @@
       "think\\redis\\": "src/"
     }
   },
+  "extra": {
+    "think": {
+      "services": [
+        "think\\redis\\service\\RedisService"
+      ]
+    }
+  },
   "require": {
     "ext-json": "*",
     "topthink/framework": "^6.0.0",
