@@ -1,16 +1,10 @@
 {
   "name": "kain/think-redis",
   "description": "Think Redis 扩展",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "kain",
-      "email": "zhangtqx@vip.qq.com"
-    }
-  ],
-  "support": {
-    "docs": "https://think-bit.kain.net.cn",
-    "email": "zhangtqx@vip.qq.com"
+  "require": {
+    "ext-json": "*",
+    "topthink/framework": "^6.0.0",
+    "predis/predis": "^1.1"
   },
   "autoload": {
     "psr-4": {
@@ -24,9 +18,15 @@
       ]
     }
   },
-  "require": {
-    "ext-json": "*",
-    "topthink/framework": "^6.0.0",
-    "predis/predis": "^1.1"
-  }
+  "authors": [
+    {
+      "name": "kain",
+      "email": "zhangtqx@vip.qq.com"
+    }
+  ],
+  "support": {
+    "docs": "https://think-bit.kain.net.cn",
+    "email": "zhangtqx@vip.qq.com"
+  },
+  "license": "MIT"
 }
