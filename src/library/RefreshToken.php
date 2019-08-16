@@ -45,4 +45,24 @@ final class RefreshToken extends RedisModel
             $this->redis->get($this->key . $jti)
         );
     }
+
+    /**
+     * 清除刷新令牌
+     * @param string $jti
+     * @param string $ack
+     * @return bool
+     */
+    public function clear(string $jti,
+                          string $ack)
+    {
+        if (!$this->redis->exists($this->key . $jti)) {
+            return true;
+        }
+
+        if (!Hash::check($ack, $this->redis->get($this->key . $jti))) {
+            return false;
+        }
+
+        return $this->redis->del([$this->key . $jti]);
+    }
 }
