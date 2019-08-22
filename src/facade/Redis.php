@@ -2,10 +2,14 @@
 
 namespace think\redis\facade;
 
+use Predis\Client;
 use Predis\Command\CommandInterface;
 use Predis\Configuration\OptionsInterface;
 use Predis\Connection\ConnectionInterface;
+use Predis\Pipeline\Pipeline;
 use Predis\Profile\ProfileInterface;
+use Predis\PubSub\Consumer as PubSubConsumer;
+use Predis\Transaction\MultiExec as MultiExecTransaction;
 use think\Facade;
 
 /**
@@ -165,6 +169,14 @@ use think\Facade;
  * @method static CommandInterface createCommand($method, $arguments = array())
  * @method static mixed executeCommand(CommandInterface $command)
  * @method static mixed __call($method, $arguments)
+ * @method static Client getClientFor($connectionID)
+ * @method static void quit()
+ * @method static bool isConnected()
+ * @method static \Predis\Connection\NodeConnectionInterface getConnectionById($connectionID)
+ * @method static mixed executeRaw(array $arguments, &$error = null)
+ * @method static Pipeline|array pipeline(\Closure $closure)
+ * @method static MultiExecTransaction|array transaction(\Closure $closure)
+ * @method static PubSubConsumer|null pubSubLoop(\Closure $closure)
  * @package think\bit\facade
  */
 final class Redis extends Facade
