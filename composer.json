@@ -1,6 +1,6 @@
 {
   "name": "kain/think-redis",
-  "description": "Think Redis 扩展",
+  "description": "ThinkPHP Redis 扩展",
   "require": {
     "ext-json": "*",
     "topthink/framework": "^6.0.0",
