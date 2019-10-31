@@ -1,8 +1,4 @@
-# Composer
-composer.phar
+/.vscode
+/vendor
+/testing/.phpunit.result.cache
 composer.lock
-vendor/
-
-# PHPUnit
-phpunit.phar
-phpunit.xml
