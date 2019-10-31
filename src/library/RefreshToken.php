@@ -2,8 +2,8 @@
 
 namespace think\redis\library;
 
-use think\bit\facade\Hash;
-use think\redis\common\RedisModel;
+use think\redis\RedisModel;
+use think\support\facade\Hash;
 
 final class RefreshToken extends RedisModel
 {

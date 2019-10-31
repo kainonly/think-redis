@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace think\redis\common;
+namespace think\redis;
 
 use Predis\Client;
 use Predis\Pipeline\Pipeline;
@@ -26,6 +26,16 @@ abstract class RedisModel
      * @var Client|Pipeline|MultiExec
      */
     protected $redis;
+
+    /**
+     * Create RedisModel
+     * @param Client|Pipeline|MultiExec $redis
+     * @return static
+     */
+    public static function create($redis = null)
+    {
+        return new static($redis);
+    }
 
     /**
      * 构造处理

@@ -2,7 +2,7 @@
 
 namespace think\redis\library;
 
-use think\redis\common\RedisModel;
+use think\redis\RedisModel;
 
 final class Sms extends RedisModel
 {
