@@ -15,7 +15,7 @@
       "think\\redis\\": "src/"
     },
     "classmap": [
-      "testing"
+      "tests"
     ]
   },
   "extra": {

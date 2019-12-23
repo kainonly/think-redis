@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace testing;
+namespace tests;
 
 use PHPUnit\Framework\TestCase;
 use Predis\Client;
