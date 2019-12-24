@@ -1,5 +1,4 @@
 <?php
-
 declare (strict_types=1);
 
 namespace think\redis;
@@ -11,7 +10,7 @@ use Predis\Transaction\MultiExec;
 /**
  * 缓存模型抽象类
  * Class RedisModel
- * @package think\bit\common
+ * @package think\redis\common
  */
 abstract class RedisModel
 {
@@ -32,18 +31,17 @@ abstract class RedisModel
      * @param Client|Pipeline|MultiExec $redis
      * @return static
      */
-    public static function create($redis = null)
+    public static function create($redis = null): RedisModel
     {
         return new static($redis);
     }
 
     /**
-     * 构造处理
      * RedisModel constructor.
      * @param Client|Pipeline|MultiExec|null $redis
      */
     public function __construct($redis = null)
     {
-        $this->redis = ($redis) ? $redis : app('redis');
+        $this->redis = !empty($redis) ? $redis : app('redis')->client('default');
     }
 }

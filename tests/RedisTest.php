@@ -3,56 +3,52 @@ declare(strict_types=1);
 
 namespace tests;
 
-use PHPUnit\Framework\TestCase;
-use Predis\Client;
-use think\App;
+use think\redis\common\RedisFactory;
 use think\redis\service\RedisService;
 
-class RedisTest extends TestCase
+class RedisTest extends BaseTest
 {
     /**
-     * @return App
+     * @var RedisFactory
      */
-    public function testNewApp()
-    {
-        $app = new App();
-        $app->initialize();
-        $this->assertInstanceOf(
-            App::class,
-            $app,
-            '应用容器创建失败'
-        );
-        return $app;
-    }
+    private $redis;
+    /**
+     * @var string
+     */
+    private $key = 'test:default';
+    /**
+     * @var string
+     */
+    private $value = 'default';
 
     /**
-     * @param App $app
-     * @return object
-     * @depends testNewApp
+     * 初始化
      */
-    public function testRegisterService(App $app)
+    public function setUp(): void
     {
-        $app->register(RedisService::class);
-        $redis = $app->get('redis');
-        $this->assertInstanceOf(
-            Client::class,
-            $redis,
-            '服务注册失败'
-        );
-        return $redis;
+        parent::setUp();
+        $this->app->register(RedisService::class);
+        $this->redis = $this->app->get('redis');
     }
 
-    /**
-     * @param Client $redis
-     * @depends testRegisterService
-     */
-    public function testSet(Client $redis)
+    public function testRedisSetValue()
     {
-        $redis->set('name', 'kain');
-        $this->assertEquals(
-            'kain',
-            $redis->get('name'),
-            'PRedis 客户端执行失败'
-        );
+        $result = $this->redis->client('default')
+            ->set($this->key, $this->value);
+        $this->assertEquals('OK', (string)$result);
+    }
+
+    public function testRedisGetValue()
+    {
+        $data = $this->redis->client('default')
+            ->get($this->key);
+        $this->assertEquals($this->value, $data);
+    }
+
+    public function testRedisDeleteValue()
+    {
+        $result = $this->redis->client('default')
+            ->del([$this->key]);
+        $this->assertEquals(1, $result);
     }
 }

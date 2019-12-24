@@ -1,26 +1,20 @@
 <?php
-
 declare (strict_types=1);
 
 namespace think\redis\service;
 
-use Predis\Client;
 use think\Service;
+use think\redis\common\RedisFactory;
 
-final class RedisService extends Service
+class RedisService extends Service
 {
     public function register()
     {
         $this->app->bind('redis', function () {
-            $config = $this->app
-                ->config
-                ->get('database.redis.default');
+            $options = $this->app->config
+                ->get('database.redis');
 
-            if (empty($config['password'])) {
-                unset($config['password']);
-            }
-
-            return new Client($config);
+            return new RedisFactory($options);
         });
     }
 }

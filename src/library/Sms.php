@@ -1,10 +1,12 @@
 <?php
+declare (strict_types=1);
 
 namespace think\redis\library;
 
+use Exception;
 use think\redis\RedisModel;
 
-final class Sms extends RedisModel
+class Sms extends RedisModel
 {
     protected $key = 'sms:';
 
@@ -13,9 +15,13 @@ final class Sms extends RedisModel
      * @param string $phone 手机号
      * @param string $code 验证码
      * @param int $timeout 有效时间，默认120秒
-     * @return bool
+     * @return string
      */
-    public function factory($phone, $code, $timeout = 120)
+    public function factory(
+        string $phone,
+        string $code,
+        int $timeout = 120
+    ): string
     {
         /**
          * publish_time 发布时间
@@ -27,7 +33,8 @@ final class Sms extends RedisModel
             'timeout' => $timeout
         ]);
 
-        return $this->redis->setex($this->key . $phone, $timeout, $data);
+        return (string)$this->redis
+            ->setex($this->key . $phone, $timeout, $data);
     }
 
     /**
@@ -36,11 +43,16 @@ final class Sms extends RedisModel
      * @param string $code 验证码
      * @param boolean $once 验证仅一次有效，验证完成即不存在
      * @return bool
+     * @throws Exception
      */
-    public function check($phone, $code, $once = false)
+    public function check(
+        string $phone,
+        string $code,
+        bool $once = false
+    ): bool
     {
         if (!$this->redis->exists($this->key . $phone)) {
-            return false;
+            throw new Exception("手机号 [$phone] 验证不存在.");
         }
 
         $data = json_decode($this->redis->get($this->key . $phone), true);
@@ -57,15 +69,17 @@ final class Sms extends RedisModel
     /**
      * 获取验证时间信息
      * @param string $phone 手机号
-     * @return array|bool
+     * @return array
+     * @throws Exception
      */
-    public function time($phone)
+    public function time(string $phone)
     {
         if (!$this->redis->exists($this->key . $phone)) {
-            return false;
+            throw new Exception("手机号 [$phone] 验证不存在.");
         }
 
         $data = json_decode($this->redis->get($this->key . $phone), true);
+
         /**
          * publish_time 发布时间
          * timeout 有效时间

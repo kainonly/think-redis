@@ -1,11 +1,13 @@
 <?php
+declare (strict_types=1);
 
 namespace think\redis\library;
 
+use Exception;
 use think\redis\RedisModel;
 use think\support\facade\Hash;
 
-final class RefreshToken extends RedisModel
+class RefreshToken extends RedisModel
 {
     protected $key = 'refresh-token:';
 
@@ -14,13 +16,15 @@ final class RefreshToken extends RedisModel
      * @param string $jti 令牌 ID
      * @param string $ack 确认码
      * @param int $expires 过期时间
-     * @return mixed
+     * @return string
      */
-    public function factory(string $jti,
-                            string $ack,
-                            int $expires)
+    public function factory(
+        string $jti,
+        string $ack,
+        int $expires
+    ): string
     {
-        return $this->redis->setex(
+        return (string)$this->redis->setex(
             $this->key . $jti,
             $expires,
             Hash::create($ack)
@@ -32,12 +36,15 @@ final class RefreshToken extends RedisModel
      * @param string $jti 令牌 ID
      * @param string $ack 确认码
      * @return bool
+     * @throws Exception
      */
-    public function verify(string $jti,
-                           string $ack)
+    public function verify(
+        string $jti,
+        string $ack
+    ): bool
     {
         if (!$this->redis->exists($this->key . $jti)) {
-            return false;
+            throw new Exception("令牌 [$jti] 不存在.");
         }
 
         return Hash::check(
@@ -52,8 +59,10 @@ final class RefreshToken extends RedisModel
      * @param string $ack
      * @return bool
      */
-    public function clear(string $jti,
-                          string $ack)
+    public function clear(
+        string $jti,
+        string $ack
+    ): bool
     {
         if (!$this->redis->exists($this->key . $jti)) {
             return true;
@@ -63,6 +72,6 @@ final class RefreshToken extends RedisModel
             return false;
         }
 
-        return $this->redis->del([$this->key . $jti]);
+        return (bool)$this->redis->del([$this->key . $jti]);
     }
 }
