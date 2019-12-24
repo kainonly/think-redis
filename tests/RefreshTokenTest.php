@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace tests;
 
+use Exception;
+use think\extra\service\HashService;
 use think\redis\library\RefreshToken;
 use think\redis\service\RedisService;
 
@@ -30,13 +32,32 @@ class RefreshTokenTest extends BaseTest
     {
         parent::setUp();
         $this->app->register(RedisService::class);
-        $this->model = RefreshToken::create($this->app->get('redis'));
+        $this->model = RefreshToken::create();
         $this->jti = 'test';
-        $this->ack = rand(0, 1000);
+        $this->ack = md5('test');
     }
 
     public function testFactory()
     {
-        $this->model->factory('test', '1', 60);
+        $this->app->register(HashService::class);
+        $result = $this->model->factory($this->jti, $this->ack, 60);
+        $this->assertEquals('OK', (string)$result);
+    }
+
+    public function testVerify()
+    {
+        try {
+            $this->app->register(HashService::class);
+            $result = $this->model->verify($this->jti, $this->ack);
+            $this->assertTrue($result);
+        } catch (Exception $e) {
+            $this->expectErrorMessage($e->getMessage());
+        }
+    }
+
+    public function testClear()
+    {
+        $result = $this->model->clear($this->jti, $this->ack);
+        $this->assertTrue($result);
     }
 }

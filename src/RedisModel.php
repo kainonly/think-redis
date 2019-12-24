@@ -10,7 +10,7 @@ use Predis\Transaction\MultiExec;
 /**
  * 缓存模型抽象类
  * Class RedisModel
- * @package think\redis\common
+ * @package think\redis
  */
 abstract class RedisModel
 {
