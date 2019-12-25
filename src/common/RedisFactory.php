@@ -15,6 +15,12 @@ class RedisFactory
     private $options = [];
 
     /**
+     * 客户端集合
+     * @var array
+     */
+    private $clients = [];
+
+    /**
      * RedisFactory constructor.
      * @param array $options
      */
@@ -30,6 +36,9 @@ class RedisFactory
      */
     public function client(string $name = 'default'): Client
     {
+        if (!empty($this->clients[$name])) {
+            return $this->clients[$name];
+        }
         if (empty($this->options[$name])) {
             throw new InvalidArgumentException("The [$name] does not exist.");
         }
@@ -37,6 +46,7 @@ class RedisFactory
         if (empty($option['password'])) {
             unset($option['password']);
         }
-        return new Client($option);
+        $this->clients[$name] = new Client($option);
+        return $this->clients[$name];
     }
 }
