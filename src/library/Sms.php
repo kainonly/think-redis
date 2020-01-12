@@ -72,7 +72,7 @@ class Sms extends RedisModel
      * @return array
      * @throws Exception
      */
-    public function time(string $phone)
+    public function time(string $phone): array
     {
         if (!$this->redis->exists($this->key . $phone)) {
             throw new Exception("手机号 [$phone] 验证不存在.");
