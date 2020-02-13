@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace tests;
+namespace RedisTests;
 
 use Exception;
+use Tests\BaseTest;
 use think\extra\service\HashService;
 use think\redis\library\RefreshToken;
 use think\redis\service\RedisService;
