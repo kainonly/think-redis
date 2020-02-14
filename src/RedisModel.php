@@ -6,6 +6,7 @@ namespace think\redis;
 use Predis\Client;
 use Predis\Pipeline\Pipeline;
 use Predis\Transaction\MultiExec;
+use think\facade\Config;
 
 /**
  * 缓存模型抽象类
@@ -15,7 +16,7 @@ use Predis\Transaction\MultiExec;
 abstract class RedisModel
 {
     /**
-     * 缓存模型键值
+     * 缓存模型键名
      * @var string
      */
     protected $key;
@@ -42,6 +43,15 @@ abstract class RedisModel
      */
     public function __construct($redis = null)
     {
-        $this->redis = !empty($redis) ? $redis : app('redis')->client('default');
+        $this->redis = $redis !== null ? $redis : app('redis')->client('default');
+    }
+
+    /**
+     * 获取键名
+     * @return string
+     */
+    protected function getKey(): string
+    {
+        return Config::get('app.app_name') . ':' . $this->key;
     }
 }
