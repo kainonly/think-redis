@@ -8,7 +8,7 @@ use think\redis\common\RedisFactory;
 
 class RedisService extends Service
 {
-    public function register()
+    public function register(): void
     {
         $this->app->bind('redis', function () {
             $options = $this->app->config

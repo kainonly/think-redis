@@ -19,7 +19,7 @@ abstract class RedisModel
      * 缓存模型键名
      * @var string
      */
-    protected $key;
+    protected string $key;
 
     /**
      * Predis 操作类
@@ -43,7 +43,7 @@ abstract class RedisModel
      */
     public function __construct($redis = null)
     {
-        $this->redis = $redis !== null ? $redis : app('redis')->client('default');
+        $this->redis = $redis ?? app('redis')->client('default');
     }
 
     /**

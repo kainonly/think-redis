@@ -3,7 +3,7 @@
   "description": "ThinkPHP Redis 扩展",
   "require": {
     "ext-json": "*",
-    "php": ">=7.4.0",
+    "php": ">=7.4.*",
     "topthink/framework": "^6.0.0",
     "predis/predis": "^1.1"
   },

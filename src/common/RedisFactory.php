@@ -12,13 +12,13 @@ class RedisFactory
      * 配置集合
      * @var array
      */
-    private $options = [];
+    private array $options;
 
     /**
      * 客户端集合
      * @var array
      */
-    private $clients = [];
+    private array $clients = [];
 
     /**
      * RedisFactory constructor.

@@ -3,12 +3,12 @@ declare (strict_types=1);
 
 namespace think\redis\library;
 
-use Exception;
+use think\exception\InvalidArgumentException;
 use think\redis\RedisModel;
 
 class Sms extends RedisModel
 {
-    protected $key = 'sms:';
+    protected string $key = 'sms:';
 
     /**
      * 生成手机验证缓存
@@ -43,7 +43,7 @@ class Sms extends RedisModel
      * @param string $code 验证码
      * @param boolean $once 验证仅一次有效，验证完成即不存在
      * @return bool
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function check(
         string $phone,
@@ -52,7 +52,7 @@ class Sms extends RedisModel
     ): bool
     {
         if (!$this->redis->exists($this->key . $phone)) {
-            throw new Exception("手机号 [$phone] 验证不存在.");
+            throw new InvalidArgumentException("手机号 [$phone] 验证不存在.");
         }
 
         $data = json_decode($this->redis->get($this->key . $phone), true);
@@ -70,12 +70,12 @@ class Sms extends RedisModel
      * 获取验证时间信息
      * @param string $phone 手机号
      * @return array
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function time(string $phone): array
     {
         if (!$this->redis->exists($this->key . $phone)) {
-            throw new Exception("手机号 [$phone] 验证不存在.");
+            throw new InvalidArgumentException("手机号 [$phone] 验证不存在.");
         }
 
         $data = json_decode($this->redis->get($this->key . $phone), true);

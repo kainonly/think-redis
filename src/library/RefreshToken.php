@@ -3,13 +3,13 @@ declare (strict_types=1);
 
 namespace think\redis\library;
 
-use Exception;
+use think\exception\InvalidArgumentException;
 use think\redis\RedisModel;
 use think\support\facade\Hash;
 
 class RefreshToken extends RedisModel
 {
-    protected $key = 'refresh-token:';
+    protected string $key = 'refresh-token:';
 
     /**
      * 生产刷新令牌
@@ -36,7 +36,7 @@ class RefreshToken extends RedisModel
      * @param string $jti 令牌 ID
      * @param string $ack 确认码
      * @return bool
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function verify(
         string $jti,
@@ -44,7 +44,7 @@ class RefreshToken extends RedisModel
     ): bool
     {
         if (!$this->redis->exists($this->key . $jti)) {
-            throw new Exception("令牌 [$jti] 不存在.");
+            throw new InvalidArgumentException("令牌 [$jti] 不存在.");
         }
 
         return Hash::check(
