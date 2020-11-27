@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace RedisTests;
 
 use Exception;
-use Tests\BaseTest;
 use think\redis\common\RedisFactory;
 use think\redis\library\Sms;
 use think\redis\service\RedisService;
@@ -14,22 +13,22 @@ class SmsTest extends BaseTest
     /**
      * @var Sms
      */
-    private $model;
+    private Sms $model;
 
     /**
      * @var RedisFactory
      */
-    private $redis;
+    private RedisFactory $redis;
 
     /**
      * @var string
      */
-    private $phone;
+    private string $phone;
 
     /**
      * @var string
      */
-    private $code;
+    private string $code;
 
     /**
      * 初始化
@@ -38,45 +37,47 @@ class SmsTest extends BaseTest
     {
         parent::setUp();
         $this->app->register(RedisService::class);
-        $this->redis = $this->app->get('redis');
+        $redis = $this->app->get('redis');
+        assert($redis instanceof RedisFactory);
+        $this->redis = $redis;
         $this->model = Sms::create();
         $this->phone = '155xxxxxxxx';
         $this->code = '1234';
     }
 
-    public function testFactory()
+    public function testFactory(): void
     {
         $result = $this->model->factory($this->phone, $this->code);
-        $this->assertEquals('OK', (string)$result);
+        self::assertEquals('OK', (string)$result);
     }
 
-    public function testCheck()
+    public function testCheck(): void
     {
         try {
             $result = $this->model->check($this->phone, $this->code);
-            $this->assertTrue($result);
+            self::assertTrue($result);
         } catch (Exception $e) {
             $this->expectErrorMessage($e->getMessage());
         }
     }
 
-    public function testTime()
+    public function testTime(): void
     {
         try {
             $data = $this->model->time($this->phone);
-            $this->assertNotEmpty($data);
+            self::assertNotEmpty($data);
         } catch (Exception $e) {
             $this->expectErrorMessage($e->getMessage());
         }
     }
 
-    public function testCheckOnce()
+    public function testCheckOnce(): void
     {
         try {
             $result = $this->model->check($this->phone, $this->code, true);
-            $this->assertTrue($result);
+            self::assertTrue($result);
             $exists = $this->redis->client()->exists('sms:' . $this->phone);
-            $this->assertFalse((bool)$exists);
+            self::assertFalse((bool)$exists);
         } catch (Exception $e) {
             $this->expectErrorMessage($e->getMessage());
         }

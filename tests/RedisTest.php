@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace RedisTests;
 
-use Tests\BaseTest;
 use think\redis\common\RedisFactory;
 use think\redis\service\RedisService;
 
@@ -16,11 +15,11 @@ class RedisTest extends BaseTest
     /**
      * @var string
      */
-    private $key = 'test:default';
+    private string $key = 'test:default';
     /**
      * @var string
      */
-    private $value = 'default';
+    private string $value = 'default';
 
     /**
      * 初始化
@@ -32,24 +31,21 @@ class RedisTest extends BaseTest
         $this->redis = $this->app->get('redis');
     }
 
-    public function testRedisSetValue()
+    public function testRedisSetValue(): void
     {
-        $result = $this->redis->client('default')
-            ->set($this->key, $this->value);
-        $this->assertEquals('OK', (string)$result);
+        $result = $this->redis->client('default')->set($this->key, $this->value);
+        self::assertEquals('OK', (string)$result);
     }
 
-    public function testRedisGetValue()
+    public function testRedisGetValue(): void
     {
-        $data = $this->redis->client('default')
-            ->get($this->key);
-        $this->assertEquals($this->value, $data);
+        $data = $this->redis->client('default')->get($this->key);
+        self::assertEquals($this->value, $data);
     }
 
-    public function testRedisDeleteValue()
+    public function testRedisDeleteValue(): void
     {
-        $result = $this->redis->client('default')
-            ->del([$this->key]);
-        $this->assertEquals(1, $result);
+        $result = $this->redis->client('default')->del([$this->key]);
+        self::assertEquals(1, $result);
     }
 }

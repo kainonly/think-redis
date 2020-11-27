@@ -17,11 +17,7 @@ class Sms extends RedisModel
      * @param int $timeout 有效时间，默认120秒
      * @return string
      */
-    public function factory(
-        string $phone,
-        string $code,
-        int $timeout = 120
-    ): string
+    public function factory(string $phone, string $code, int $timeout = 120): string
     {
         /**
          * publish_time 发布时间
@@ -33,8 +29,7 @@ class Sms extends RedisModel
             'timeout' => $timeout
         ]);
 
-        return (string)$this->redis
-            ->setex($this->key . $phone, $timeout, $data);
+        return (string)$this->redis->setex($this->key . $phone, $timeout, $data);
     }
 
     /**
@@ -45,11 +40,7 @@ class Sms extends RedisModel
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function check(
-        string $phone,
-        string $code,
-        bool $once = false
-    ): bool
+    public function check(string $phone, string $code, bool $once = false): bool
     {
         if (!$this->redis->exists($this->key . $phone)) {
             throw new InvalidArgumentException("手机号 [$phone] 验证不存在.");
