@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace RedisTests;
 
 use Exception;
-use think\redis\common\RedisFactory;
 use think\redis\library\Sms;
-use think\redis\service\RedisService;
+use think\redis\RedisFactory;
+use think\redis\RedisService;
 
 class SmsTest extends BaseTest
 {

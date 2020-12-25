@@ -1,7 +1,7 @@
 <?php
 declare (strict_types=1);
 
-namespace think\redis\common;
+namespace think\redis;
 
 use Predis\Client;
 use InvalidArgumentException;

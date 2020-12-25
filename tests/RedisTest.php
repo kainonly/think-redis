@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace RedisTests;
 
-use think\redis\common\RedisFactory;
-use think\redis\service\RedisService;
+use think\redis\RedisFactory;
+use think\redis\RedisService;
 
 class RedisTest extends BaseTest
 {

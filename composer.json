@@ -18,13 +18,13 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "RedisTests\\": "library/think-redis/tests/"
+      "RedisTests\\": "tests/"
     }
   },
   "extra": {
     "think": {
       "services": [
-        "think\\redis\\service\\RedisService"
+        "think\\redis\\RedisService"
       ]
     }
   },

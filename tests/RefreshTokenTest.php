@@ -6,7 +6,7 @@ namespace RedisTests;
 use Exception;
 use think\extra\service\HashService;
 use think\redis\library\RefreshToken;
-use think\redis\service\RedisService;
+use think\redis\RedisService;
 
 class RefreshTokenTest extends BaseTest
 {
