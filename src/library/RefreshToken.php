@@ -20,7 +20,17 @@ class RefreshToken extends RedisModel
      */
     public function factory(string $jti, string $ack, int $expires): string
     {
-        return (string)$this->redis->setex($this->key . $jti, $expires, Hash::create($ack));
+        return (string)$this->redis->setex($this->getKey($jti), $expires, Hash::create($ack));
+    }
+
+    /**
+     * 续约刷新令牌
+     * @param string $jti
+     * @param int $expires
+     */
+    public function renewal(string $jti, int $expires): void
+    {
+        $this->redis->expire($this->getKey($jti), $expires);
     }
 
     /**
@@ -28,15 +38,14 @@ class RefreshToken extends RedisModel
      * @param string $jti 令牌 ID
      * @param string $ack 确认码
      * @return bool
-     * @throws InvalidArgumentException
      */
     public function verify(string $jti, string $ack): bool
     {
-        if (!$this->redis->exists($this->key . $jti)) {
-            throw new InvalidArgumentException("令牌 [$jti] 不存在.");
+        if (!$this->redis->exists($this->getKey($jti))) {
+            return false;
         }
 
-        return Hash::check($ack, $this->redis->get($this->key . $jti));
+        return Hash::check($ack, $this->redis->get($this->getKey($jti)));
     }
 
     /**
@@ -47,14 +56,14 @@ class RefreshToken extends RedisModel
      */
     public function clear(string $jti, string $ack): bool
     {
-        if (!$this->redis->exists($this->key . $jti)) {
+        if (!$this->redis->exists($this->getKey($jti))) {
             return true;
         }
 
-        if (!Hash::check($ack, $this->redis->get($this->key . $jti))) {
+        if (!Hash::check($ack, $this->redis->get($this->getKey($jti)))) {
             return false;
         }
 
-        return (bool)$this->redis->del([$this->key . $jti]);
+        return (bool)$this->redis->del([$this->getKey($jti)]);
     }
 }

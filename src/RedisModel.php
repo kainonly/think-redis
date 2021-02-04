@@ -48,10 +48,11 @@ abstract class RedisModel
 
     /**
      * 获取键名
+     * @param string $name
      * @return string
      */
-    protected function getKey(): string
+    protected function getKey(string $name = ''): string
     {
-        return Config::get('app.app_name') . ':' . $this->key;
+        return Config::get('app.app_name') . ':' . $this->key . $name;
     }
 }
